@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { useAuth } from '@redwoodjs/auth'
+import { Link, routes } from '@redwoodjs/router'
 
 const Container = styled.section`
   width: 80%;
@@ -7,7 +9,22 @@ const Container = styled.section`
 `
 
 const MainLayout = ({ children }) => {
-  return <Container>{children}</Container>
+  const { login } = useAuth()
+  return (
+    <Container>
+      <nav>
+        <ul>
+          <li>
+            <Link to={routes.about()}>About</Link>
+          </li>
+          <li>
+            <button onClick={login}>Login</button>
+          </li>
+        </ul>
+      </nav>
+      {children}
+    </Container>
+  )
 }
 
 export default MainLayout
